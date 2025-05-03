@@ -1,0 +1,14 @@
+Django==5.2
+djangorestframework==3.14.0
+djangorestframework-simplejwt==5.3.1
+drf-yasg==1.21.7
+python-dotenv==1.0.0
+celery==5.3.6
+redis==5.0.1
+sendgrid==6.11.0
+social-auth-app-django==5.4.3
+google-auth==2.39.0
+django-cors-headers==4.3.1
+psycopg2-binary==2.9.9
+gunicorn==21.2.0
+whitenoise==6.6.0 
