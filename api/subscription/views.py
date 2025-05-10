@@ -82,7 +82,8 @@ class SubscriptionView(APIView):
     def get(self, request):
         subscription = Subscription.objects.filter(
             user=request.user,
-            current_period_end__gt=datetime.now()
+            current_period_end__gt=datetime.now(),
+            status="active"
         ).order_by('-created_at').first()
 
         if subscription is None:
@@ -157,5 +158,24 @@ class SubscriptionView(APIView):
         except SubscriptionPlan.DoesNotExist:
             return Response(
                 {'error': 'Plan not found'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+    def delete(self, request):
+        try:
+            subscription = Subscription.objects.get(user=request.user, status="active")
+
+            stripe.Subscription.delete(subscription.stripe_subscription_id)
+
+            subscription.status = "canceled"
+            subscription.save()
+
+            return Response(
+                {'message': 'Subscription successfully canceled'},
+                status=status.HTTP_200_OK
+            )
+        except Subscription.DoesNotExist:
+            return Response(
+                {'error': 'No active subscription found to cancel'},
                 status=status.HTTP_404_NOT_FOUND
             )
