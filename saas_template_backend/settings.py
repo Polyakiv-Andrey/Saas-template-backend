@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'api.authentication',
     'api.payment',
     'api.subscription',
+    'api.support',
 ]
 
 MIDDLEWARE = [
