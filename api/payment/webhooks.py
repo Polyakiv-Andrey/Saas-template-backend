@@ -1,4 +1,7 @@
+import datetime
+
 import stripe
+from django.utils import timezone
 from django.conf import settings
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -63,12 +66,29 @@ def handle_subscription_updated(subscription_data):
         subscription = Subscription.objects.get(
             stripe_subscription_id=subscription_data.id
         )
+
+        current_period_start = subscription_data.current_period_start
+        current_period_end = subscription_data.current_period_end
+
+        if isinstance(current_period_start, (int, float)):
+            current_period_start = timezone.make_aware(datetime.datetime.fromtimestamp(current_period_start))
+        elif isinstance(current_period_start, str):
+            current_period_start = timezone.make_aware(datetime.datetime.fromisoformat(current_period_start))
+
+        if isinstance(current_period_end, (int, float)):
+            current_period_end = timezone.make_aware(datetime.datetime.fromtimestamp(current_period_end))
+        elif isinstance(current_period_end, str):
+            current_period_end = timezone.make_aware(datetime.datetime.fromisoformat(current_period_end))
+
         subscription.status = subscription_data.status
-        subscription.current_period_start = subscription_data.current_period_start
-        subscription.current_period_end = subscription_data.current_period_end
+        subscription.current_period_start = current_period_start
+        subscription.current_period_end = current_period_end
         subscription.cancel_at_period_end = subscription_data.cancel_at_period_end
         subscription.save()
+
+        print("Subscription updated successfully.")
     except Subscription.DoesNotExist:
+        print("Subscription not found.")
         pass
 
 
@@ -85,6 +105,7 @@ def handle_subscription_deleted(subscription_data):
 
 def handle_payment_failed(invoice_data):
     try:
+        print(invoice_data)
         subscription = Subscription.objects.get(
             stripe_subscription_id=invoice_data.subscription
         )

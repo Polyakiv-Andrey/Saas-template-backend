@@ -100,7 +100,11 @@ class SubscriptionView(APIView):
 
         try:
             plan = SubscriptionPlan.objects.get(id=serializer.validated_data['plan_id'])
-
+            existing_subscriptions = Subscription.objects.filter(user=request.user, status="active")
+            for subscription in existing_subscriptions:
+                stripe.Subscription.delete(subscription.stripe_subscription_id)
+                subscription.status = "canceled"
+                subscription.save()
             try:
                 customer = stripe.Customer.create(
                     email=request.user.email,
