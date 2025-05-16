@@ -19,7 +19,7 @@ class SupportTicket(models.Model):
         choices=TICKET_STATUSES,
         default='open'
     )
-
+    created_by = models.EmailField(default="anonim@n.com")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     resolved_at = models.DateTimeField(null=True, blank=True)
