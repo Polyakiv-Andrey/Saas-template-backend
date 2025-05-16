@@ -12,15 +12,14 @@ from django.http import HttpResponseRedirect
 
 from saas_template_backend import settings
 from .serializers import (
-    RegisterSerializer, 
+    RegisterSerializer,
     CustomTokenObtainPairSerializer,
     PasswordResetRequestSerializer,
     PasswordResetSerializer,
     ChangePasswordSerializer,
-    VerifyOTPSerializer,
+    VerifyOTPSerializer, UserSerializer,
 )
 
-# from django.contrib.auth.models import User
 from social_django.utils import load_strategy, load_backend
 from social_core.exceptions import AuthForbidden
 import logging
@@ -289,3 +288,11 @@ class GoogleCallbackView(APIView):
                 {'error': 'Internal server error'},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+
+
+class CurrentUserView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
