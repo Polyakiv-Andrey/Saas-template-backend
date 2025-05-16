@@ -7,4 +7,4 @@ class SupportTicketWriteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SupportTicket
-        fields = ["title", "description"]
+        fields = ["title", "description", 'image']

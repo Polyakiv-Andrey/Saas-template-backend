@@ -13,6 +13,7 @@ class SupportTicket(models.Model):
     ]
     title = models.CharField(max_length=150)
     description = models.TextField()
+    image = models.FileField(upload_to='support_tickets/%Y/%m/%d/', blank=True, null=True,)
     status = models.CharField(
         max_length=20,
         choices=TICKET_STATUSES,
