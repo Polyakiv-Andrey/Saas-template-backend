@@ -3,13 +3,11 @@ from .models import SupportTicket
 
 
 class SupportTicketFilter(django_filters.FilterSet):
-    interacted = django_filters.BooleanFilter(method='filter_interacted')
+    status = django_filters.ChoiceFilter(
+        choices=SupportTicket.TICKET_STATUSES,
+        lookup_expr='iexact',
+    )
 
     class Meta:
         model = SupportTicket
-        fields = ['interacted']
-
-    def filter_interacted(self, queryset, name, value):
-        if value:
-            return queryset.exclude(status='open')
-        return queryset.filter(status='open')
+        fields = ['status']

@@ -43,3 +43,16 @@ class SupportTicketReadSerializer(serializers.ModelSerializer):
 
     def get_reported_by_email(self, obj):
         return obj.reported_by.email if obj.reported_by else None
+
+
+class SupportTicketStatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SupportTicket
+        fields = ['status']
+        read_only_fields = []
+
+    def validate_status(self, value):
+        allowed = {choice[0] for choice in SupportTicket.TICKET_STATUSES}
+        if value not in allowed:
+            raise serializers.ValidationError("Invalid status")
+        return value
