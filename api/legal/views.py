@@ -82,3 +82,112 @@ class PrivacyPolicyView(APIView):
             ]
         })
 
+
+class TermsOfServiceView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        return Response({
+            "title": "Terms of Service",
+            "effective_date": "2025-05-20",
+            "content": [
+                {
+                    "heading": "1. Acceptance of Terms",
+                    "text": (
+                        "By accessing or using our Service, you agree to be bound by these "
+                        "Terms of Service and our Privacy Policy. If you do not agree, you "
+                        "may not use the Service."
+                    )
+                },
+                {
+                    "heading": "2. Description of Service",
+                    "text": (
+                        "Our Service provides a cloud-based platform for managing subscriptions, "
+                        "user accounts, and support tickets. We may update or modify the Service at any time."
+                    )
+                },
+                {
+                    "heading": "3. User Accounts",
+                    "text": (
+                        "You must register for an account to access certain features. You are "
+                        "responsible for maintaining the confidentiality of your account credentials "
+                        "and for all activities that occur under your account."
+                    )
+                },
+                {
+                    "heading": "4. Subscription and Payment",
+                    "text": (
+                        "Some features require a paid subscription. By subscribing, you agree to "
+                        "pay all applicable fees. Subscriptions renew automatically unless canceled. "
+                        "You may cancel at any time, but payments are non-refundable except as required by law."
+                    )
+                },
+                {
+                    "heading": "5. User Conduct",
+                    "items": [
+                        "Violating any laws or regulations",
+                        "Infringing intellectual property rights",
+                        "Transmitting harmful or malicious content",
+                        "Attempting to gain unauthorized access to the Service"
+                    ]
+                },
+                {
+                    "heading": "6. Support and Ticket System",
+                    "text": (
+                        "You may submit support requests or report issues through our support ticket "
+                        "system. We strive to respond promptly but do not guarantee specific response times."
+                    )
+                },
+                {
+                    "heading": "7. Intellectual Property",
+                    "text": (
+                        "All content, trademarks, and software associated with the Service are the "
+                        "property of the Company or its licensors. You may not copy, modify, or distribute "
+                        "any part of the Service without our written consent."
+                    )
+                },
+                {
+                    "heading": "8. Termination",
+                    "text": (
+                        "We may suspend or terminate your access to the Service at our discretion, "
+                        "including for violation of these Terms. You may also close your account at any time."
+                    )
+                },
+                {
+                    "heading": "9. Disclaimers",
+                    "text": (
+                        "The Service is provided “as is” and “as available.” We make no warranties "
+                        "regarding the Service’s availability, reliability, or suitability for your purposes."
+                    )
+                },
+                {
+                    "heading": "10. Limitation of Liability",
+                    "text": (
+                        "To the maximum extent permitted by law, the Company is not liable for any "
+                        "indirect, incidental, or consequential damages arising from your use of the Service."
+                    )
+                },
+                {
+                    "heading": "11. Changes to Terms",
+                    "text": (
+                        "We may update these Terms from time to time. We will notify you of material "
+                        "changes by posting the new Terms on this page. Continued use of the Service "
+                        "constitutes acceptance of the updated Terms."
+                    )
+                },
+                {
+                    "heading": "12. Governing Law",
+                    "text": (
+                        "These Terms are governed by the laws of [Your Jurisdiction], without regard "
+                        "to its conflict of law principles."
+                    )
+                },
+                {
+                    "heading": "13. Contact Us",
+                    "text": (
+                        "If you have any questions about these Terms, please contact us at "
+                        "[support@example.com]."
+                    )
+                },
+            ]
+        })
