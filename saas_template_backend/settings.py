@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'api.payment',
     'api.subscription',
     'api.support',
+    'api.legal',
 ]
 
 MIDDLEWARE = [
