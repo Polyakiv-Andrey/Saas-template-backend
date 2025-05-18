@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
-from saas_template_backend.settings import SUBSCRIPTION_RETURN_URL
+from core.settings import SUBSCRIPTION_RETURN_URL
 from .models import PaymentMethod
 from .serializers import PaymentMethodSerializer
 from ..subscription.models import Subscription

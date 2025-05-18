@@ -10,7 +10,7 @@ from drf_yasg import openapi
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.http import HttpResponseRedirect
 
-from saas_template_backend import settings
+from core import settings
 from .serializers import (
     RegisterSerializer,
     CustomTokenObtainPairSerializer,

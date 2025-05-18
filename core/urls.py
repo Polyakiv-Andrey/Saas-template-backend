@@ -1,5 +1,5 @@
 """
-URL configuration for saas_template_backend project.
+URL configuration for core project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.2/topics/http/urls/
@@ -21,7 +21,7 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
-from saas_template_backend import settings
+from core import settings
 
 schema_view = get_schema_view(
     openapi.Info(

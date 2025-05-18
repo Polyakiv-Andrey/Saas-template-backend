@@ -3,7 +3,7 @@ import ssl
 from celery import shared_task
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
-from saas_template_backend import settings
+from core import settings
 
 
 @shared_task
